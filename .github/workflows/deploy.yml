@@ -1,0 +1,22 @@
+name: IC Local en Puerto 97
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build-and-deploy:
+    runs-on: [self-hosted, wsl-hello]
+    steps:
+      - name: Descargar código
+        uses: actions/checkout@v4
+
+      - name: Limpiar contenedor anterior
+        run: docker rm -f mi-web-contenedor || true
+
+      - name: Construir imagen
+        run: docker build -t mi-pagina-web .
+
+      - name: Levantar en Puerto 97
+        # Aquí hacemos el puente: tu Windows (97) -> Contenedor (80)
+        run: docker run -d -p 97:80 --name mi-web-contenedor mi-pagina-web
