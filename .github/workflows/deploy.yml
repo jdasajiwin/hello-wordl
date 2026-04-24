@@ -6,7 +6,7 @@ on:
 
 jobs:
   deploy:
-    runs-on: [self-hosted, win-hello]
+    runs-on: [self-hosted, will-hello]
 
     steps:
       - name: Descargar código
