@@ -11,12 +11,8 @@ jobs:
     steps:
       - name: Descargar código
         uses: actions/checkout@v4
-
-      - name: Instalar dependencias
-        run: npm install
-
-      - name: Construir proyecto
-        run: npm run build
+        with:
+          path: .
 
       - name: Crear directorio si no existe
         run: mkdir -p /opt/docker/hello-test
@@ -24,5 +20,5 @@ jobs:
       - name: Limpiar deploy anterior
         run: rm -rf /opt/docker/hello-test/*
 
-      - name: Copiar build al servidor
-        run: cp -r ./dist/* /opt/docker/hello-test/
+      - name: Copiar archivos del proyecto
+        run: cp -r ./* /opt/docker/hello-test/
