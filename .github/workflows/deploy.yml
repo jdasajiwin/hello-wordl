@@ -28,3 +28,4 @@ jobs:
           docker rm -f hello-test || true
           docker build -t hello-test-img .
           docker run -d -p 97:80 --name hello-test hello-test-img
+          
