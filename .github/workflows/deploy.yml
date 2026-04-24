@@ -6,7 +6,7 @@ on:
 
 jobs:
   deploy:
-    runs-on: [self-hosted, wsl-hello]
+    runs-on: [self-hosted, win-hello]
 
     steps:
       - name: Descargar código
