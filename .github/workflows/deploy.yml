@@ -1,22 +1,28 @@
-name: IC Local en Puerto 97
+name: Deploy Hello Test
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "win" ]
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: [self-hosted, wsl-hello]
+
     steps:
       - name: Descargar código
         uses: actions/checkout@v4
 
-      - name: Limpiar contenedor anterior
-        run: docker rm -f mi-web-contenedor || true
+      - name: Instalar dependencias
+        run: npm install
 
-      - name: Construir imagen
-        run: docker build -t mi-pagina-web .
+      - name: Construir proyecto
+        run: npm run build
 
-      - name: Levantar en Puerto 97
-        # Aquí hacemos el puente: tu Windows (97) -> Contenedor (80)
-        run: docker run -d -p 97:80 --name mi-web-contenedor mi-pagina-web
+      - name: Crear directorio si no existe
+        run: mkdir -p /opt/docker/hello-test
+
+      - name: Limpiar deploy anterior
+        run: rm -rf /opt/docker/hello-test/*
+
+      - name: Copiar build al servidor
+        run: cp -r ./dist/* /opt/docker/hello-test/
