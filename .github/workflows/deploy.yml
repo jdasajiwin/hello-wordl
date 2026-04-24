@@ -15,10 +15,10 @@ jobs:
           path: .
 
       - name: Crear directorio si no existe
-        run: mkdir -p /opt/docker/hello-test
+        run: mkdir -p /opt/docker/ic/hello-test
 
       - name: Limpiar deploy anterior
-        run: rm -rf /opt/docker/hello-test/*
+        run: rm -rf /opt/docker/ic/hello-test/*
 
       - name: Copiar archivos del proyecto
-        run: cp -r ./* /opt/docker/hello-test/
+        run: cp -r ./* /opt/docker/ic/hello-test/
