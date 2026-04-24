@@ -22,3 +22,10 @@ jobs:
 
       - name: Copiar archivos del proyecto
         run: cp -r ./* /opt/docker/ic/hello-test/
+      - name: Reconstruir contenedor
+        run: |
+          cd /opt/docker/ic/hello-test
+          docker rm -f hello-test || true
+          docker build -t hello-test-img .
+          docker run -d -p 97:80 --name hello-test hello-test-img
+
